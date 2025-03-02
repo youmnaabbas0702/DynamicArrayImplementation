@@ -185,6 +185,43 @@ public:
 		return true;
 	}
 
+	bool InsertAtBeginning(T value)
+	{
+		return InsertAt(0, value);
+	}
+
+	bool InsertBefore(int Index, T value)
+	{
+		if (Index < 1)
+			return InsertAt(0, value);
+
+		return InsertAt(Index - 1, value);
+	}
+
+	bool InsertAfter(int Index, T value)
+	{
+		if (Index >= _Size)
+			return InsertAt(_Size - 1, value);
+
+		return InsertAt(Index + 1, value);
+	}
+
+	void InsertAtEnd(T value)
+	{
+		_Size++;
+		_TempArray = new T[_Size];
+
+		for (int i = 0; i < _Size - 1; i++)
+		{
+			_TempArray[i] = Array[i];
+		}
+
+		_TempArray[_Size - 1] = value;
+
+		delete[] Array;
+		Array = _TempArray;
+	}
+
 	~clsDynamicArray()
 	{
 		delete[] Array;
