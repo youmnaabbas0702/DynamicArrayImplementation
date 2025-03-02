@@ -82,6 +82,84 @@ public:
 		Array = new T[_Size];
 	}
 
+	/*bool DeleteItemAt(int Index)
+	{
+		if (Index >= _Size || Index < 0)
+			return false;
+
+		_TempArray = new T[_Size - 1];
+
+		int Counter = 0;
+		for (int i = 0; i < _Size; i++)
+		{
+			if (i == Index)
+			{
+				continue;
+			}
+			_TempArray[Counter] = Array[i];
+			Counter++;
+
+		}
+
+		delete[] Array;
+		Array = _TempArray;
+		_Size--;
+		return true;
+	}*/
+
+	bool DeleteItemAt(int Index)
+	{
+		if (Index >= _Size || Index < 0)
+			return false;
+
+		_Size--;
+		_TempArray = new T[_Size];
+
+		for (int i = 0; i < Index; i++)
+		{
+			_TempArray[i] = Array[i];
+		}
+
+		for (int i = Index + 1; i < _Size + 1; i++)
+		{
+			_TempArray[i - 1] = Array[i];
+		}
+
+		delete[] Array;
+		Array = _TempArray;
+		return true;
+	}
+
+	void DeleteFirstItem()
+	{
+		DeleteItemAt(0);
+	}
+
+	void DeleteLastItem() 
+	{
+		DeleteItemAt(_Size - 1);
+	}
+
+	int Find(T value)
+	{
+		for (int i = 0; i < _Size; i++)
+		{
+			if (Array[i] == value)
+				return i;
+		}
+		return -1;
+	}
+
+	bool DeleteItem(T value)
+	{
+		int Index = Find(value);
+		if (Index == -1)
+			return false;
+
+		DeleteItemAt(Index);
+		return true;
+	}
+
 	~clsDynamicArray()
 	{
 		delete[] Array;
