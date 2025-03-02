@@ -160,6 +160,31 @@ public:
 		return true;
 	}
 
+	bool InsertAt(int Index, T value)
+	{
+		if (Index >= _Size || Index < 0)
+			return false;
+
+		_Size++;
+		_TempArray = new T[_Size];
+
+		for (int i = 0; i < Index; i++)
+		{
+			_TempArray[i] = Array[i];
+		}
+
+		_TempArray[Index] = value;
+
+		for (int i = Index + 1; i < _Size; i++)
+		{
+			_TempArray[i] = Array[i - 1];
+		}
+
+		delete[] Array;
+		Array = _TempArray;
+		return true;
+	}
+
 	~clsDynamicArray()
 	{
 		delete[] Array;

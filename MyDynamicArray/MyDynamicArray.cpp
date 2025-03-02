@@ -73,4 +73,10 @@ int main()
     DynamicArray.PrintList();
 
     cout << "\nArray Size: " << DynamicArray.Size() << endl;
+
+    DynamicArray.InsertAt(2, 500);
+    cout << "\n\nArray Items after inserting 500 at index 2:" << endl;
+    DynamicArray.PrintList();
+    cout << "\nArray Size: " << DynamicArray.Size() << endl;
+
 }
